@@ -1,4 +1,4 @@
-package com.github.knight704.urbanairshipbadgecounter;
+package com.github.knight704.urbanairshipbadgecounter.storage;
 
 public interface BadgeStorage {
     int getBadgeCount();

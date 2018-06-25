@@ -1,1 +1,1 @@
-include ':app', ':urbanairshipbadgecounter'
+include ':sample', ':urbanairshipbadgecounter'

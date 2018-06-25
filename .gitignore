@@ -1,6 +1,7 @@
 *.iml
 .gradle
 .idea/*
+sample/google-services.json
 /local.properties
 .DS_Store
 /build
