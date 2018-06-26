@@ -9,16 +9,17 @@ is not guaranteed on every android device.
 2) TODO: Include setup instructions for lib
 
 ### Setup
-In your MainApplication.java onCreate method put
+In your MainApplication.java onCreate method put this method call before any usage of `BadgeManager` module.
 ```java
-BadgeManager.init(context, "MY_EXTRA_KEY");
+String myExtraKeyConstant = "MY_EXTA_KEY";
+BadgeManager.init(context, myExtraKeyConstant);
 ```
-where "MY_EXTRA_KEY" - any string constant, the same would be provided as part of android extra within push payload to UA. See example below
-If null will be provided as a key, that default value will be used (which is "com.github.knight704.urbanairshipbadgecounter.BADGE_COUNT").
+where `myExtraKeyConstant` - any string constant. You should provide badge value under this constant name in extra push payload to UA. See example below.
+If null will be provided as a key, then default value will be used (which is "com.github.knight704.urbanairshipbadgecounter.BADGE_COUNT").
 
 ### Sending push
-At the moment library only supports increment/decrement/set logic for badge counter.
-To increment/decrement badge counter use "+X"/"-X" format, to set exact value just use "X" (where X is any non-zero number)
+Library supports increment/decrement/set logic for badge counter.
+To increment/decrement badge counter use "+X"/"-X" format, to set exact value use "X" (where X is any non-zero number).
 Badge info for android should be part of extra, i.e
 ```json
 {
@@ -39,10 +40,10 @@ See detailed info about push payload on [UA API Reference](https://docs.urbanair
 
 ### Run sample
 1) Edit `sample/src/main/assets/airshipconfig.properties` and put there correct keys from UA console
-2) Follow instructions of setting up
+2) Include google-services.json from Firebase to `sample/`
+3) If necessary edit `MainApplication.java` to use badgeExtra key you want
 
 ### TODO
-- Create sample
 - Prepare package for usage with gradle (i.e upload to bintray)
 - Add react-native wrapper around badge counter (as a separate npm-package)
 - Add unit-testing
