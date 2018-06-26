@@ -20,7 +20,7 @@ public class BadgeManager {
 
     private Context context;
     private BadgeStorage badgeStorage;
-    private String badgeExtraKey = DEFAULT_EXTRA_BADGE_KEY;
+    private String badgeExtraKey;
 
     @MainThread
     public static void init(Context context, String badgeExtraKey) {
@@ -28,7 +28,7 @@ public class BadgeManager {
             throw new RuntimeException("BadgeManager already initialized");
         }
         instance = getInstance(context);
-        instance.badgeExtraKey = badgeExtraKey;
+        instance.badgeExtraKey = badgeExtraKey != null ? badgeExtraKey : DEFAULT_EXTRA_BADGE_KEY;
     }
 
     @MainThread

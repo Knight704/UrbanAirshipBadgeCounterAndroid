@@ -11,6 +11,6 @@ public class MainApplication extends Application {
         super.onCreate();
         BadgeManager.init(this, null);
         UAirship.takeOff(this);
-        UAirship.shared().getPushManager().setPushEnabled(true);
+        UAirship.shared().getPushManager().setUserNotificationsEnabled(true);
     }
 }
