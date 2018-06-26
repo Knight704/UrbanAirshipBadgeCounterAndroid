@@ -12,7 +12,6 @@ import com.urbanairship.push.PushMessage;
 public class BadgeAirshipReceiver extends AirshipReceiver {
     @Override
     protected void onPushReceived(@NonNull Context context, @NonNull PushMessage message, boolean notificationPosted) {
-        super.onPushReceived(context, message, notificationPosted);
         if (notificationPosted) {
             BadgeManager.getInstance(context).handlePushReceived(message);
         }

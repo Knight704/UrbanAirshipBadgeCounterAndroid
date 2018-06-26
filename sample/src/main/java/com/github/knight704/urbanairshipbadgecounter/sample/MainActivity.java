@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.github.knight704.urbanairshipbadgecounter.BadgeManager;
 import com.urbanairship.AirshipReceiver;
 import com.urbanairship.UAirship;
 import com.urbanairship.push.PushMessage;
@@ -17,6 +18,7 @@ import com.urbanairship.util.UAStringUtil;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getName();
+    private BadgeManager badgeManager;
     private TextView tvChannelId;
 
     @Override
@@ -24,6 +26,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         tvChannelId = findViewById(R.id.tvChannelId);
+        TextView tvBadgeSupported = findViewById(R.id.tvBadgeSupported);
+
+        badgeManager = BadgeManager.getInstance(this);
+        tvBadgeSupported.setText(String.format("Badge counter supported: %b", badgeManager.isBadgeCounterSupported()));
     }
 
     private void updateChannelId(String channelId) {
@@ -39,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
         filter.addAction("com.urbanairship.push.CHANNEL_UPDATED");
         registerReceiver(channelIdUpdateReceiver, filter);
         refreshChannelId();
+
+        // Lets clear badge counter on every app open
+        badgeManager.clearCount();
     }
 
     private void refreshChannelId() {
