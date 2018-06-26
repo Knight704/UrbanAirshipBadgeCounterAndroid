@@ -1,3 +1,5 @@
+[![](https://www.jitpack.io/v/knight704/UrbanAirshipBadgeCounterAndroid.svg)](https://www.jitpack.io/#knight704/UrbanAirshipBadgeCounterAndroid)
+
 ### About
 This is urban airship extension library for either [android native SDK](https://github.com/urbanairship/android-library) or [react-native SDK](https://github.com/urbanairship/react-native-module)
 that is adding support for badge counter manipulations from within UA-service similarly like on iOS.
@@ -6,7 +8,21 @@ is not guaranteed on every android device.
 
 ### Installation
 1) Follow instructions on how to include UA SDK into your [react-native](https://github.com/urbanairship/react-native-module) or [android](https://github.com/urbanairship/android-library)
-2) TODO: Include setup instructions for lib
+2) Add jitpack to your root `build.gradle`:
+```
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://www.jitpack.io' }
+    }
+}
+```
+3) Add the dependency:
+```
+dependencies {
+    implementation 'com.github.knight704:UrbanAirshipBadgeCounterAndroid:0.1.0'
+}
+```
 
 ### Setup
 In your MainApplication.java onCreate method put this method call before any usage of `BadgeManager` module.
@@ -44,7 +60,6 @@ See detailed info about push payload on [UA API Reference](https://docs.urbanair
 3) If necessary edit `MainApplication.java` to use badgeExtra key you want
 
 ### TODO
-- Prepare package for usage with gradle (i.e upload to bintray)
 - Add react-native wrapper around badge counter (as a separate npm-package)
 - Add unit-testing
-- Improve extensibility
+
