@@ -3,25 +3,20 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 27
     buildToolsVersion '27.0.3'
+
     defaultConfig {
         applicationId "com.github.knight704.urbanairshipbadgecounter.sample"
-        minSdkVersion 18
+        minSdkVersion 16
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
     }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
 }
 
 dependencies {
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.urbanairship.android:urbanairship-fcm:9.3.0'
-    api project(':urbanairshipbadgecounter')
+    compile 'com.android.support:appcompat-v7:27.1.1'
+    compile 'com.urbanairship.android:urbanairship-fcm:9.3.0'
+    compile project(':urbanairshipbadgecounter')
 }
 
 apply plugin: 'com.google.gms.google-services'
