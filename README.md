@@ -7,10 +7,8 @@ It is based on [ShortcutBadger lib](https://github.com/leolin310148/ShortcutBadg
 is not guaranteed on every android device.
 
 ### Installation
-Follow instructions on how to include UA SDK into your [react-native](https://github.com/urbanairship/react-native-module) or [android](https://github.com/urbanairship/android-library)
-
-#### Android
-Add jitpack to your root `build.gradle`:
+1) Follow instructions on how to include UA SDK into your [react-native](https://github.com/urbanairship/react-native-module) or [android](https://github.com/urbanairship/android-library)
+2) Add jitpack to your root `build.gradle`:
 ```
 allprojects {
     repositories {
@@ -19,19 +17,14 @@ allprojects {
     }
 }
 ```
-Add the dependency:
+3) Add the dependency:
 ```
 dependencies {
     implementation 'com.github.knight704:UrbanAirshipBadgeCounterAndroid:0.1.0'
 }
 ```
 
-#### React-Native
-TBD
-
 ### Setup
-
-#### Android
 In your `MainApplication.java` onCreate method put this method call before any usage of `BadgeManager` module.
 ```java
 String myExtraKeyConstant = "MY_EXTA_KEY";
@@ -39,10 +32,6 @@ BadgeManager.init(context, myExtraKeyConstant);
 ```
 where `myExtraKeyConstant` - any string constant. You should provide badge value under this constant name in extra push payload to UA. See example below.
 If null will be provided as a key, then default value will be used (which is "com.github.knight704.urbanairshipbadgecounter.BADGE_COUNT").
-
-#### React-Native
-In your `MainApplication.java` method `getPackages` add creation of `RNBadgeCounterPackage` and provide context and `badgeExtraKey`
-To be continued
 
 ### Sending push
 Library supports increment/decrement/set logic for badge counter.
@@ -71,6 +60,5 @@ See detailed info about push payload on [UA API Reference](https://docs.urbanair
 3) If necessary edit `MainApplication.java` to use badgeExtra key you want
 
 ### TODO
-- Add react-native wrapper around badge counter (as a separate npm-package)
 - Add unit-testing
 
