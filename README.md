@@ -1,13 +1,13 @@
-[![](https://www.jitpack.io/v/knight704/UrbanAirshipBadgeCounterAndroid.svg)](https://www.jitpack.io/#knight704/UrbanAirshipBadgeCounterAndroid)
-
 ### About
-This is urban airship extension library for either [android native SDK](https://github.com/urbanairship/android-library) or [react-native SDK](https://github.com/urbanairship/react-native-module)
-that is adding support for badge counter manipulations from within UA-service similarly like on iOS.
+This is urban airship extension library for [android native SDK](https://github.com/urbanairship/android-library).
+Here is [react-native wrapper](https://github.com/Knight704/RNUrbanAirshipBadgeCounterAndroid) for this library.
+
+The idea was to add support for badge counter manipulations from within UA-service similarly like on iOS.
 It is based on [ShortcutBadger lib](https://github.com/leolin310148/ShortcutBadger) to support as much launchers as possible, but one should bear in mind that badge counter support
 is not guaranteed on every android device.
 
 ### Installation
-1) Follow instructions on how to include UA SDK into your [react-native](https://github.com/urbanairship/react-native-module) or [android](https://github.com/urbanairship/android-library)
+1) Follow instructions on how to include UA SDK [on SDK page](https://github.com/urbanairship/android-library)
 2) Add jitpack to your root `build.gradle`:
 ```
 allprojects {
@@ -20,7 +20,7 @@ allprojects {
 3) Add the dependency:
 ```
 dependencies {
-    implementation 'com.github.knight704:UrbanAirshipBadgeCounterAndroid:0.1.0'
+    compile 'com.github.knight704:UrbanAirshipBadgeCounterAndroid:0.1.1'
 }
 ```
 
@@ -56,9 +56,5 @@ See detailed info about push payload on [UA API Reference](https://docs.urbanair
 
 ### Run sample
 1) Edit `sample/src/main/assets/airshipconfig.properties` and put there correct keys from UA console
-2) Include google-services.json from Firebase to `sample/`
-3) If necessary edit `MainApplication.java` to use badgeExtra key you want
-
-### TODO
-- Add unit-testing
-
+2) Put google-services.json to `sample/`
+3) Optionally edit `MainApplication.java` to use custom badgeExtra key
