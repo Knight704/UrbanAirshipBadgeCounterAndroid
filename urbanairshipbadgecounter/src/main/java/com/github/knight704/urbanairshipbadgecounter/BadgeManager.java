@@ -14,7 +14,7 @@ import me.leolin.shortcutbadger.ShortcutBadger;
  * and to actual badge storage to keep current value persistent.
  */
 public class BadgeManager implements BadgeStorage {
-    private static final String DEFAULT_EXTRA_BADGE_KEY = "com.github.knight704.urbanairshipbadgecounter.BADGE_COUNT";
+    private static final String DEFAULT_EXTRA_BADGE_KEY = "com.github.knight704.BADGE_COUNT";
     private static BadgeManager instance;
 
     private Context context;
