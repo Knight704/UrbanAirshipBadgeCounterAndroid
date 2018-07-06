@@ -2,12 +2,9 @@ package com.github.knight704.urbanairshipbadgecounter;
 
 import android.content.Context;
 import android.support.annotation.MainThread;
-import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.github.knight704.urbanairshipbadgecounter.storage.BadgeStorage;
 import com.github.knight704.urbanairshipbadgecounter.storage.SharedPreferenceBadgeStorage;
-import com.urbanairship.push.PushMessage;
 
 import me.leolin.shortcutbadger.ShortcutBadger;
 
@@ -55,25 +52,12 @@ public class BadgeManager implements BadgeStorage {
         this.badgeStorage = badgeStorage;
     }
 
-    protected void handlePushReceived(@NonNull PushMessage message) {
-        try {
-            String badgeCountMsg = message.getExtra(badgeExtraKey, null);
-            if (badgeCountMsg == null) {
-                return;
-            }
-            boolean isIncrement = badgeCountMsg.indexOf("+") == 0;
-            boolean isDecrement = badgeCountMsg.indexOf("-") == 0;
-            int value = Integer.parseInt(isIncrement || isDecrement ? badgeCountMsg.substring(1) : badgeCountMsg);
+    public final String getBadgeExtraKey() {
+        return badgeExtraKey;
+    }
 
-            if (isIncrement || isDecrement) {
-                shiftWith(isIncrement ? value : -value);
-            } else {
-                setBadgeCount(value);
-            }
-        } catch (Exception e) {
-            // something went wrong during parsing, do nothing with badge counter
-            Log.w(BadgeManager.class.getName(), "Failed to handle push receive event due to", e);
-        }
+    public boolean isBadgeCounterSupported() {
+        return ShortcutBadger.isBadgeCounterSupported(context);
     }
 
     @Override
@@ -96,9 +80,5 @@ public class BadgeManager implements BadgeStorage {
         int newValue = badgeStorage.shiftWith(howMany);
         ShortcutBadger.applyCount(context, newValue);
         return newValue;
-    }
-
-    public boolean isBadgeCounterSupported() {
-        return ShortcutBadger.isBadgeCounterSupported(context);
     }
 }
