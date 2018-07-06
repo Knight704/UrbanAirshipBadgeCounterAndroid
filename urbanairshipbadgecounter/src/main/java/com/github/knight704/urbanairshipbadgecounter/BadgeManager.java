@@ -13,8 +13,10 @@ import me.leolin.shortcutbadger.ShortcutBadger;
 
 /**
  * The main entry point to work with badge counter on android.
+ * It plays role of {@link BadgeStorage} proxy that call {@link ShortcutBadger} to change badge count
+ * and to actual badge storage to keep current value persistent.
  */
-public class BadgeManager {
+public class BadgeManager implements BadgeStorage {
     private static final String DEFAULT_EXTRA_BADGE_KEY = "com.github.knight704.urbanairshipbadgecounter.BADGE_COUNT";
     private static BadgeManager instance;
 
@@ -58,7 +60,7 @@ public class BadgeManager {
             if (isIncrement || isDecrement) {
                 shiftWith(isIncrement ? value : -value);
             } else {
-                setCount(value);
+                setBadgeCount(value);
             }
         } catch (Exception e) {
             // something went wrong during parsing, do nothing with badge counter
@@ -66,23 +68,26 @@ public class BadgeManager {
         }
     }
 
-    public int getCount() {
+    @Override
+    public int getBadgeCount() {
         return badgeStorage.getBadgeCount();
     }
 
-    public void setCount(int count) {
-        badgeStorage.setBadgeCount(count);
-        ShortcutBadger.applyCount(context, count);
+    @Override
+    public void setBadgeCount(int value) {
+        badgeStorage.setBadgeCount(value);
+        if (value == 0) {
+            ShortcutBadger.removeCount(context);
+        } else {
+            ShortcutBadger.applyCount(context, value);
+        }
     }
 
-    public void clearCount() {
-        badgeStorage.setBadgeCount(0);
-        ShortcutBadger.removeCount(context);
-    }
-
-    public void shiftWith(int howMany) {
+    @Override
+    public int shiftWith(int howMany) {
         int newValue = badgeStorage.shiftWith(howMany);
         ShortcutBadger.applyCount(context, newValue);
+        return newValue;
     }
 
     public boolean isBadgeCounterSupported() {
