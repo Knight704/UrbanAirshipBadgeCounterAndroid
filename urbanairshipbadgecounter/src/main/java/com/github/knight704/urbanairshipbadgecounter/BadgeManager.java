@@ -29,8 +29,16 @@ public class BadgeManager implements BadgeStorage {
         if (instance != null) {
             throw new RuntimeException("BadgeManager already initialized");
         }
-        instance = getInstance(context);
-        instance.badgeExtraKey = badgeExtraKey != null ? badgeExtraKey : DEFAULT_EXTRA_BADGE_KEY;
+        BadgeManager badgeManager = getInstance(context);
+        badgeManager.badgeExtraKey = badgeExtraKey != null ? badgeExtraKey : DEFAULT_EXTRA_BADGE_KEY;
+
+        /*
+         * To avoid differences between storage value and actual badge count in ShortcutBadger
+         * It's important to make sync between them during initialization.
+         * For example data could be cleared from settings while some badge value was set.
+         */
+        int currentBadgeCount = badgeManager.badgeStorage.getBadgeCount();
+        badgeManager.setBadgeCount(currentBadgeCount);
     }
 
     @MainThread
