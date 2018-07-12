@@ -22,7 +22,7 @@ allprojects {
 3) Add the dependency:
 ```
 dependencies {
-    compile 'com.github.knight704:UrbanAirshipBadgeCounterAndroid:0.1.1'
+    compile 'com.github.knight704:UrbanAirshipBadgeCounterAndroid:0.2.0'
 }
 ```
 
