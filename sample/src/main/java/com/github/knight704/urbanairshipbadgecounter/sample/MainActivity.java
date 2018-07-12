@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         refreshChannelId();
 
         // Lets clear badge counter on every app open
-        badgeManager.clearCount();
+        badgeManager.setBadgeCount(0);
     }
 
     private void refreshChannelId() {
